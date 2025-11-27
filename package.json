@@ -1,0 +1,57 @@
+{
+    "name": "questions-service",
+    "version": "0.1.0",
+    "description": "Servidor de Preguntas y Respuestas",
+
+    "scripts": {
+        "start": "npm run build && npm run watch",
+        "build": "npm run build-ts && npm run tslint",
+        "serve": "node dist/server.js",
+        "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\"  \"npm run watch-ts\" \"nodemon dist/server.js\"",
+        "build-ts": "tsc",
+        "watch-ts": "tsc -w",
+        "tslint": "tslint -c tslint.json -p tsconfig.json"
+    },
+    "dependencies": {
+        "body-parser": "1.20.1",
+        "compression": "1.7.4",
+        "connect-mongo": "4.6.0",
+        "dotenv": "16.0.3",
+        "express": "4.18.1",
+        "typed-rest-client": "1.8.9",
+        "escape-html": "1.0.3",
+        "mongoose": "6.6.5",
+        "node-cache": "5.1.2",
+        "morgan": "1.10.0",
+        "winston": "3.8.2",
+        "helmet": "6.0.0",
+        "cors": "2.8.5",
+        "amqplib": "0.10.3",
+        "jimp": "0.16.2",
+        "async": "3.2.4"
+    },
+    "engines": {
+        "node": "18.4.x"
+    },
+    "devDependencies": {
+        "@types/body-parser": "1.19.2",
+        "@types/express": "4.17.14",
+        "@types/jest": "29.1.2",
+        "@types/mongodb": "4.0.7",
+        "@types/mongoose": "5.11.97",
+        "@types/escape-html": "1.0.2",
+        "@types/morgan": "1.9.3",
+        "@types/node": "18.8.3",
+        "@types/helmet": "4.0.0",
+        "@types/cors": "2.8.12",
+        "@types/compression": "1.7.2",
+        "@types/amqplib": "0.8.2",
+        "@types/async": "3.2.15",
+        "apidoc": "0.22.1",
+        "apidoc-markdown2": "0.3.7",
+        "concurrently": "7.4.0",
+        "tslint": "6.1.3",
+        "nodemon": "2.0.20",
+        "typescript": "4.8.4"
+    }
+}
