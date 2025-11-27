@@ -47,6 +47,23 @@ Este microservicio se encarga de gestionar las preguntas y respuestas asociadas 
   - Se envía una petición para deshabilitar una pregunta específica por su `questionId`.
   - El servicio busca la pregunta y la elimina.
 
+### CU: Eliminar una respuesta
+
+- **Precondición**:  
+  - Usuario autenticado como admin **o** creador de la respuesta.  
+  - La pregunta existe.  
+  - La respuesta existe dentro de esa pregunta.
+- **Camino normal**:
+  - El usuario envía una solicitud para eliminar una respuesta específica dentro de una pregunta.
+  - El servicio valida que la pregunta exista.
+  - Se busca la respuesta dentro del array `answers`.
+  - Se valida si el usuario es admin o creador de la respuesta.
+  - La respuesta se elimina del array.
+- **Caminos alternativos**:
+  - Pregunta no encontrada → `404 NOT FOUND`
+  - Respuesta no encontrada → `404 NOT FOUND`
+  - Usuario sin permisos → `User is not authorized to delete this answer`
+
 
 ## Modelo de datos
 
@@ -156,11 +173,34 @@ Este microservicio se encarga de gestionar las preguntas y respuestas asociadas 
 ]
 ```
 
+### Eliminar una pregunta  
+`DELETE /v1/questions/{questionId}`
+
+**Response**
+`204 NO CONTENT`
+
+**Errores**
+- `404 NOT FOUND`
+- `401 User is not authorized to delete this question`
+- `403 FORBIDDEN`
+
+### Eliminar una respuesta  
+`DELETE /v1/questions/{questionId}/answers/{answerId}`
+
+**Response**
+`204 NO CONTENT`
+
+**Errores**
+- `404 NOT FOUND`
+- `401 User is not authorized to delete this answer`
+- `403 FORBIDDEN`
+
 ## Interfaz asincrónica (RabbitMQ)
 
 ### Consumidor de existencia de artículos
 
 - **Exchange**: `questions`
+- **Routing key**: `article_validation`
 - **Descripción**: Se utiliza para validar si un artículo existe para habilitar o eliminar una pregunta. Este es un consumidor desde el servicio catalog.
 
 ### Consumidor de Logout
