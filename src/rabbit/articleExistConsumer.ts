@@ -12,7 +12,7 @@ interface IArticleExistMessage {
 }
 
 export function init() {
-    const questions = new RabbitDirectConsumer("questions", "questions", "article_validation");
+    const questions = new RabbitDirectConsumer("questions", "questions");
     questions.addProcessor("article-exist", processArticleExist);
     questions.init();
 }
@@ -27,7 +27,6 @@ export async function sendArticleValidation(questionId: string, articleId: strin
         type: "article_exist",
         exchange: "questions",
         queue: "questions",
-        routingKey: "article_validation",
         message: {
             referenceId: questionId,
             articleId: articleId

@@ -39,7 +39,7 @@ const AnswerSchema = new Schema({
   },
   created: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   }
 });
 
@@ -62,7 +62,7 @@ const QuestionSchema = new Schema({
   answers: [AnswerSchema],
   created: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   },
   enabled: {
     type: Boolean,

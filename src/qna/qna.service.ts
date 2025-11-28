@@ -93,8 +93,6 @@ export async function addAnswer(user: token.IUser, questionId: string, body: Add
         const answer = {
             userId: user.id,
             text: validatedBody.text,
-            created: new Date(),
-            updated: new Date(),
             enabled: true
         };
 
